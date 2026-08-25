@@ -915,29 +915,10 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
 
-    console.log("");
-    console.log(
-        "===================================="
-    );
-
-    console.log(
-        "       HOSPITAL VIDA PLENA"
-    );
-
-    console.log(
-        "===================================="
-    );
-
-    console.log(
-        `Servidor: http://localhost:${PORT}`
-    );
-
-    console.log(
-        "Servidor iniciado com sucesso!"
-    );
-
-    console.log(
-        "===================================="
-    );
+    console.log("--------------------------------");
+    console.log("🏥 Hospital Pro");
+    console.log(`🚀 Servidor rodando na porta ${PORT}`);
+    console.log(`🌐 http://localhost:${PORT}`);
+    console.log("--------------------------------");
 
 });
