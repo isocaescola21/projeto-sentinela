@@ -251,55 +251,40 @@ let pacientes = [];
 // ==========================
 
 
-function carregarPacientes(){
+async function carregarPacientes() {
+    try {
+        const resposta = await fetch("http://localhost:3000/pacientes-triagem");
 
+        if (!resposta.ok) {
+            throw new Error("Erro ao buscar pacientes");
+        }
 
-fetch("http://localhost:3000/pacientes-triagem")
+        const pacientes = await resposta.json();
 
+        console.log("Pacientes recebidos:", pacientes);
 
-.then(res=>res.json())
+        const select = document.getElementById("paciente");
 
+        // Mantém apenas a opção inicial
+        select.innerHTML = `
+            <option value="">Selecione o paciente</option>
+        `;
 
-.then(data=>{
+        pacientes.forEach(paciente => {
+            const option = document.createElement("option");
 
+            option.value = paciente.id;
+            option.textContent = paciente.nome;
 
-pacientes = data;
+            select.appendChild(option);
+        });
 
-
-const select = document.getElementById("paciente");
-
-
-select.innerHTML = 
-`
-<option value="">
-Selecione o paciente
-</option>
-`;
-
-
-
-data.forEach(p=>{
-
-
-select.innerHTML +=
-`
-
-<option value="${p.id}">
-
-${p.nome} - CPF: ${p.cpf}
-
-</option>
-
-`;
-
-
-});
-
-
-});
-
-
+    } catch (erro) {
+        console.error("Erro ao carregar pacientes:", erro);
+    }
 }
+
+carregarPacientes();
 
 
 
