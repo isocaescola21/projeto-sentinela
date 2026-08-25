@@ -48,14 +48,13 @@ function login(){
 
 
 
-    fetch("http://localhost:3000/login", {
+ fetch("/login", {
 
+                method: "POST",
 
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
         body:JSON.stringify({
 
