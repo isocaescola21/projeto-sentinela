@@ -1,0 +1,78 @@
+{
+  "usuarios": [
+    {
+      "usuario": "admin",
+      "senha": "123",
+      "tipo": "medico"
+    },
+    {
+      "usuario": "triagem",
+      "senha": "123",
+      "tipo": "triagem"
+    },
+    {
+      "usuario": "atendimento",
+      "senha": "123",
+      "tipo": "atendimento"
+    }
+  ],
+  "pacientes": [
+    {
+      "id": 1786622156353,
+      "nome": "ANA",
+      "cpf": "14521452878",
+      "tipo": "Particular",
+      "status": "aguardando_medico",
+      "sintomas": "coriza",
+      "temperatura": 7,
+      "alergia": "dipirona",
+      "observacao": "jjjj",
+      "risco": "verde",
+      "diagnostico": "",
+      "observacaoMedica": "",
+      "conduta": ""
+    },
+    {
+      "id": 1786622267606,
+      "nome": "carla",
+      "cpf": "78541230698",
+      "tipo": "Particular",
+      "status": "aguardando_medico",
+      "sintomas": "hemorragia",
+      "temperatura": 54,
+      "alergia": "dipirona",
+      "observacao": "ljoli",
+      "risco": "vermelho",
+      "diagnostico": "",
+      "observacaoMedica": "",
+      "conduta": ""
+    }
+  ],
+  "triagens": [
+    {
+      "id": 1786622174595,
+      "pacienteId": 1786622156353,
+      "pacienteNome": "ANA",
+      "cpf": "14521452878",
+      "sintomas": "coriza",
+      "temperatura": 7,
+      "alergia": "dipirona",
+      "observacao": "jjjj",
+      "risco": "verde",
+      "data": "2026-08-13T11:56:14.595Z"
+    },
+    {
+      "id": 1786622277779,
+      "pacienteId": 1786622267606,
+      "pacienteNome": "carla",
+      "cpf": "78541230698",
+      "sintomas": "hemorragia",
+      "temperatura": 54,
+      "alergia": "dipirona",
+      "observacao": "ljoli",
+      "risco": "vermelho",
+      "data": "2026-08-13T11:57:57.779Z"
+    }
+  ],
+  "consultas": []
+}

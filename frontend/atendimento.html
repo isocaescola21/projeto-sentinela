@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hospital Vida Plena - Atendimento</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="logo">
+        <img src="logo.png" class="logo-img" alt="Hospital Vida Plena">
+    </div>
+
+
+    <h2>Atendimento</h2>
+
+
+    <p class="subtitulo">
+        Cadastro de pacientes para encaminhamento à triagem.
+    </p>
+
+
+
+    <div class="form">
+
+
+        <input 
+            id="nome"
+            placeholder="Nome do paciente"
+        >
+
+
+
+        <input 
+            id="cpf"
+            placeholder="CPF"
+        >
+
+
+
+        <select id="tipo">
+
+            <option value="">
+                Selecione o tipo de atendimento
+            </option>
+
+
+            <option value="Convenio">
+                Convênio
+            </option>
+
+
+            <option value="Particular">
+                Particular
+            </option>
+
+
+        </select>
+
+
+
+        <input
+            type="file"
+            id="foto"
+        >
+
+
+
+        <button onclick="cadastrar()">
+            Cadastrar Paciente
+        </button>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+function cadastrar(){
+
+
+    const nome =
+    document.getElementById("nome").value.trim();
+
+
+
+    const cpf =
+    document.getElementById("cpf").value.trim();
+
+
+
+    const tipo =
+    document.getElementById("tipo").value;
+
+
+
+    const foto =
+    document.getElementById("foto").files.length;
+
+
+
+
+
+    // =========================
+    // VALIDAÇÕES
+    // =========================
+
+
+    if(nome === ""){
+
+        alert("Informe o nome do paciente.");
+
+        return;
+
+    }
+
+
+
+    if(cpf === ""){
+
+        alert("Informe o CPF.");
+
+        return;
+
+    }
+
+
+
+
+    const cpfLimpo =
+    cpf.replace(/\D/g,"");
+
+
+
+
+    if(cpfLimpo.length !== 11){
+
+        alert("O CPF deve possuir 11 números.");
+
+        return;
+
+    }
+
+
+
+
+    if(tipo === ""){
+
+        alert("Selecione Convênio ou Particular.");
+
+        return;
+
+    }
+
+
+
+
+    if(foto === 0){
+
+        alert("Selecione a foto do paciente.");
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    fetch("http://localhost:3000/atendimento",{
+
+
+        method:"POST",
+
+
+        headers:{
+
+
+            "Content-Type":"application/json"
+
+        },
+
+
+        body:JSON.stringify({
+
+
+            nome,
+
+            cpf:cpfLimpo,
+
+            tipo
+
+
+        })
+
+
+    })
+
+
+
+    .then(async resposta=>{
+
+
+        const dados =
+        await resposta.json();
+
+
+
+
+        if(!resposta.ok){
+
+
+            alert(dados.erro || "Erro ao cadastrar.");
+
+            return;
+
+        }
+
+
+
+
+
+
+        alert("Paciente cadastrado com sucesso!");
+
+
+
+        // LIMPA OS CAMPOS
+
+        document.getElementById("nome").value="";
+
+        document.getElementById("cpf").value="";
+
+        document.getElementById("tipo").value="";
+
+        document.getElementById("foto").value="";
+
+
+
+
+
+        // =========================
+        // REDIRECIONAMENTO
+        // =========================
+
+        setTimeout(()=>{
+
+
+            window.location.href = "triagem.html";
+
+
+        },1000);
+
+
+
+
+    })
+
+
+
+    .catch(()=>{
+
+
+        alert("Erro ao conectar com o servidor.");
+
+
+    });
+
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

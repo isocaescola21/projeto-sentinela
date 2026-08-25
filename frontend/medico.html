@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Hospital Vida Plena - Médico</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<img src="logo.png" class="logo-img">
+
+
+<h2>Painel Médico</h2>
+
+
+<div id="pacientes">
+
+
+<!-- OS DADOS VÃO APARECER AQUI -->
+
+</div>
+
+
+
+<hr>
+
+
+<h2>Consulta Médica</h2>
+
+
+<input id="paciente" readonly placeholder="Paciente">
+
+
+<input id="diagnostico" placeholder="Diagnóstico">
+
+
+<select id="medicacao">
+
+<option value="">Selecione a medicação</option>
+
+<option>Dipirona</option>
+
+<option>Paracetamol</option>
+
+<option>Amoxicilina</option>
+
+<option>Ibuprofeno</option>
+
+<option>Outro</option>
+
+
+</select>
+
+
+<textarea id="obs" placeholder="Observações"></textarea>
+
+
+<button onclick="salvar()">
+Salvar Consulta
+</button>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let pacientes=[];
+
+
+
+function carregarPacientes(){
+
+
+fetch("http://localhost:3000/pacientes-medico")
+
+
+.then(res=>res.json())
+
+
+.then(data=>{
+
+
+pacientes=data;
+
+
+const div=document.getElementById("pacientes");
+
+
+div.innerHTML="";
+
+
+
+data.forEach((p,index)=>{
+
+
+div.innerHTML += `
+
+
+<div class="card">
+
+
+<h2>
+${p.nome}
+</h2>
+
+
+
+<p>
+
+<b>CPF:</b>
+
+${p.cpf}
+
+</p>
+
+
+
+<p>
+
+<b>Tipo:</b>
+
+${p.tipo}
+
+</p>
+
+
+
+
+<h3>
+🩺 Sintomas
+</h3>
+
+
+<p id="sintomas">
+
+${
+Array.isArray(p.sintomas)
+
+?
+p.sintomas.join(", ")
+
+:
+p.sintomas || "Não informado"
+
+}
+
+</p>
+
+
+
+
+<h3>
+🌡 Temperatura
+</h3>
+
+
+<p>
+
+${p.temperatura || "Não informado"}
+
+°C
+
+</p>
+
+
+
+
+
+<h3>
+🚨 Risco
+</h3>
+
+
+<p>
+
+${p.risco || "Não classificado"}
+
+</p>
+
+
+
+
+
+<h3>
+⚠️ Alergia
+</h3>
+
+
+<p>
+
+${p.alergia || "Nenhuma"}
+
+</p>
+
+
+
+
+
+<h3>
+📝 Observação da triagem
+</h3>
+
+
+<p>
+
+${p.observacao || "Nenhuma"}
+
+</p>
+
+
+
+
+<button onclick="selecionar(${index})">
+
+Atender
+
+</button>
+
+
+
+</div>
+
+
+
+`;
+
+
+
+});
+
+
+});
+
+
+}
+
+
+
+
+function selecionar(index){
+
+
+let p=pacientes[index];
+
+
+document.getElementById("paciente").value=p.nome;
+
+
+}
+
+
+
+
+function salvar(){
+
+
+
+fetch("http://localhost:3000/consulta",{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":"application/json"
+
+},
+
+
+body:JSON.stringify({
+
+
+paciente:
+document.getElementById("paciente").value,
+
+
+diagnostico:
+document.getElementById("diagnostico").value,
+
+
+medicacao:
+document.getElementById("medicacao").value,
+
+
+obs:
+document.getElementById("obs").value
+
+
+})
+
+
+})
+
+
+.then(()=>{
+
+
+alert("Consulta salva");
+
+
+carregarPacientes();
+
+
+});
+
+
+}
+
+
+
+
+carregarPacientes();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Vida Plena - Medicações Prescritas</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img src="logo.png" class="logo" alt="Hospital Vida Plena">
+
+        <h2>Medicações Prescritas</h2>
+
+        <p class="subtitulo">
+            Relação de medicamentos prescritos pelos médicos.
+        </p>
+
+        <div id="listaMedicacoes"></div>
+
+    </div>
+
+    <script>
+
+        function carregarMedicacoesPrescritas() {
+
+            fetch("http://localhost:3000/medicacoes")
+
+            .then(resposta => resposta.json())
+
+            .then(data => {
+
+                const lista = document.getElementById("listaMedicacoes");
+
+                lista.innerHTML = "";
+
+                if (data.length === 0) {
+
+                    lista.innerHTML = `
+                        <div class="card">
+                            <p>Nenhuma medicação prescrita.</p>
+                        </div>
+                    `;
+
+                    return;
+                }
+
+                data.forEach(c => {
+
+                    lista.innerHTML += `
+
+                        <div class="card">
+
+                            <h3>${c.paciente}</h3>
+
+                            <p>
+                                <strong>💊 Medicação:</strong><br>
+                                ${c.medicacao}
+                            </p>
+
+                            <p>
+                                <strong>🩺 Diagnóstico:</strong><br>
+                                ${c.diagnostico}
+                            </p>
+
+                            <p>
+                                <strong>📝 Observações:</strong><br>
+                                ${c.obs || "Nenhuma"}
+                            </p>
+
+                        </div>
+
+                    `;
+
+                });
+
+            })
+
+            .catch(() => {
+
+                document.getElementById("listaMedicacoes").innerHTML = `
+                    <div class="card">
+                        <p>Erro ao carregar as medicações.</p>
+                    </div>
+                `;
+
+            });
+
+        }
+
+        carregarMedicacoesPrescritas();
+
+    </script>
+
+</body>
+
+</html>
