@@ -916,7 +916,7 @@ app.use((req, res) => {
 app.listen(PORT, () => {
 
     console.log("--------------------------------");
-    console.log("🏥 Hospital Pro");
+    console.log("🏥 Hospital Vida Plena");
     console.log(`🚀 Servidor rodando na porta ${PORT}`);
     console.log(`🌐 http://localhost:${PORT}`);
     console.log("--------------------------------");
