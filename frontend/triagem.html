@@ -251,7 +251,7 @@ let pacientes = [];
 
 async function carregarPacientes() {
     try {
-        const resposta = await fetch("http://localhost:3000/pacientes-triagem");
+        const resposta = await fetch("/pacientes-triagem");
 
         if (!resposta.ok) {
             throw new Error("Erro ao buscar pacientes");
@@ -263,7 +263,6 @@ async function carregarPacientes() {
 
         const select = document.getElementById("paciente");
 
-        // Mantém apenas a opção inicial
         select.innerHTML = `
             <option value="">Selecione o paciente</option>
         `;
@@ -283,7 +282,6 @@ async function carregarPacientes() {
 }
 
 carregarPacientes();
-
 
 
 
@@ -443,7 +441,7 @@ temperatura
 
 
 
-fetch("http://localhost:3000/triagem",{
+fetch("/triagem"),{
 
 
 method:"POST",
