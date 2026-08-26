@@ -88,7 +88,7 @@ let pacientes=[];
 function carregarPacientes(){
 
 
-fetch("http://localhost:3000/pacientes-medico")
+fetch("/pacientes-medico")
 
 
 .then(res=>res.json())
@@ -272,7 +272,7 @@ function salvar(){
 
 
 
-fetch("http://localhost:3000/consulta",{
+fetch("/consulta",{
 
 
 method:"POST",
