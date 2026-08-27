@@ -287,256 +287,206 @@ carregarPacientes();
 
 
 // ==========================
-// CLASSIFICAÇÃO
+// CLASSIFICAR RISCO
 // ==========================
 
+function classificarRisco(sintoma, temperatura) {
 
-function classificarRisco(sintoma, temperatura){
+    temperatura = Number(temperatura);
 
+    // EMERGÊNCIA
+    if (temperatura >= 40) {
+        return "vermelho";
+    }
 
-const graves = [
+    // MUITO URGENTE
+    if (temperatura >= 39) {
+        return "laranja";
+    }
 
-"infarto",
+    // URGENTE
+    if (temperatura >= 38) {
+        return "amarelo";
+    }
 
-"avc",
-
-"convulsao",
-
-"hemorragia",
-
-"falta_ar_grave"
-
-];
-
-
-
-const moderados = [
-
-"febre",
-
-"vomito",
-
-"diarreia",
-
-"falta_ar_moderada"
-
-];
-
-
-
-
-if(Number(temperatura) >= 39){
-
-return "vermelho";
-
+    // POUCO URGENTE
+    return "verde";
 }
-
-
-
-if(graves.includes(sintoma)){
-
-return "vermelho";
-
-}
-
-
-
-if(moderados.includes(sintoma)){
-
-return "amarelo";
-
-}
-
-
-
-return "verde";
-
-
-}
-
-
-
-
 
 
 // ==========================
 // SALVAR TRIAGEM
 // ==========================
 
+async function salvar() {
 
-function salvar(){
-
-
-
-const id = 
-document.getElementById("paciente").value;
-
-
-
-const sintoma =
-document.getElementById("sintoma").value;
+    const id = document.getElementById("paciente").value;
+    const sintoma = document.getElementById("sintoma").value;
+    const temperatura = document.getElementById("temp").value;
+    const alergia = document.getElementById("alergia").value;
+    const observacao = document.getElementById("observacao").value;
 
 
+    // ==========================
+    // VALIDAÇÕES
+    // ==========================
 
-const temperatura =
-document.getElementById("temp").value;
+    if (id === "") {
+        alert("Selecione o paciente.");
+        return;
+    }
+
+    if (sintoma === "") {
+        alert("Selecione o sintoma.");
+        return;
+    }
+
+    if (temperatura === "") {
+        alert("Informe a temperatura.");
+        return;
+    }
 
 
+    // ==========================
+    // CONVERTER TEMPERATURA
+    // ==========================
 
-const alergia =
-document.getElementById("alergia").value;
+    const temperaturaNumero = Number(temperatura);
 
-
-
-const observacao =
-document.getElementById("observacao").value;
-
-
-
-
-
-if(id===""){
+    if (isNaN(temperaturaNumero)) {
+        alert("Informe uma temperatura válida.");
+        return;
+    }
 
 
-alert("Selecione o paciente.");
+    // ==========================
+    // CLASSIFICAR RISCO
+    // ==========================
 
-return;
+    const risco = classificarRisco(
+        sintoma,
+        temperaturaNumero
+    );
 
+
+    // ==========================
+    // ENVIAR PARA O SERVIDOR
+    // ==========================
+
+    try {
+
+        const resposta = await fetch("/triagem", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                id: id,
+
+                sintomas: sintoma,
+
+                temperatura: temperaturaNumero,
+
+                alergia: alergia,
+
+                observacao: observacao,
+
+                risco: risco
+
+            })
+
+        });
+
+
+        // ==========================
+        // VERIFICAR RESPOSTA
+        // ==========================
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro ao salvar a triagem."
+            );
+
+        }
+
+
+        const dados = await resposta.json();
+
+        console.log(
+            "Triagem salva:",
+            dados
+        );
+
+
+        // ==========================
+        // MOSTRAR RESULTADO
+        // ==========================
+
+        alert(
+            "Triagem salva com sucesso!"
+        );
+
+
+        const resultado =
+            document.getElementById("resultado");
+
+
+        if (resultado) {
+
+            resultado.innerHTML =
+                "Classificação: " +
+                risco.toUpperCase();
+
+        }
+
+
+        // ==========================
+        // IR PARA MÉDICO
+        // ==========================
+
+        setTimeout(() => {
+
+            window.location.href =
+                "medico.html";
+
+        }, 1000);
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro:",
+            erro
+        );
+
+        alert(
+            "Erro ao conectar com o servidor."
+        );
+
+    }
 
 }
 
 
+// ==========================
+// GARANTIR QUE O BOTÃO
+// ENCONTRE A FUNÇÃO
+// ==========================
 
-if(sintoma===""){
+window.salvar = salvar;
 
 
-alert("Selecione o sintoma.");
-
-return;
-
-
-}
-
-
-
-if(temperatura===""){
-
-
-alert("Informe a temperatura.");
-
-return;
-
-
-}
-
-
-
-const risco =
-classificarRisco(
-sintoma,
-temperatura
-);
-
-
-
-
-
-fetch("/triagem"),{
-
-
-method:"POST",
-
-
-headers:{
-
-
-"Content-Type":"application/json"
-
-
-},
-
-
-body:JSON.stringify({
-
-
-id:id,
-
-
-sintomas:sintoma,
-
-
-temperatura:Number(temperatura),
-
-
-alergia:alergia,
-
-
-observacao:observacao,
-
-
-risco:risco
-
-
-
-})
-
-
-})
-
-
-
-.then(res=>res.json())
-
-
-.then(dados=>{
-
-
-alert("Triagem salva com sucesso!");
-
-
-
-document.getElementById("resultado").innerHTML =
-
-"Classificação: " + risco.toUpperCase();
-
-
-
-
-setTimeout(()=>{
-
-
-window.location.href="medico.html";
-
-
-},1000);
-
-
-
-})
-
-
-
-.catch(()=>{
-
-
-alert("Erro ao conectar com o servidor.");
-
-
-
-});
-
-
-
-}
-
-
-
-
+// ==========================
+// CARREGAR PACIENTES
+// ==========================
 
 carregarPacientes();
-
-
-
+  
 </script>
 
 
