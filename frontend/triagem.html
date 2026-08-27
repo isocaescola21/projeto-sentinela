@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Triagem</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/triagem.css">
 <style>
-  .btn-tv{
-    background-color: #28a745;
+  .btn-tv {
+    background: green;
     color: white;
     border: none;
     padding: 8px 14px;
@@ -15,8 +15,8 @@
     font-size: 14px;
     margin-left: 8px;
   }
+  .btn-tv:hover { background: #1e7e342f;}
 
-  .btn-tv:hover { background-color: #1e7e34; }
   .pacientes-fila{
     margin-bottom: 30px;
     background: #f0f4ff;
@@ -24,20 +24,18 @@
     padding: 16px;
     border: 1px solid #d0d8f0;
   }
-
   .pacientes-fila h3 {
     margin-top: 0;
     color: #333;
     display: flex;
     justify-content: space-between;
-}
-
-  .pacientes-fila h3 span{
+    align-items: center;
+  }
+  .pacientes-fila h3 span {
     font-size: 13px;
     font-weight: normal;
     color: #666;
   }
-
   .fila-item {
     display: flex;
     align-items: center;
@@ -48,9 +46,9 @@
     margin-bottom: 8px;
     border: 1px solid #dce4ff;
   }
-
   .fila-item strong { font-size: 15px; }
-  .fila-item small { color: #888; font-size: 12px;}
+  .fila-item small { color: #888;
+  font-size: 12px; }
   .btn-abrir-tv {
     display: inline-block;
     background: #17a2b8;
@@ -62,440 +60,161 @@
     cursor: pointer;
     border: none;
   }
-
-  .btn-abrir-tv:hover { background: #117a8b; }
-
+  .btn-abrir-tv:hover {
+background: #17a2b8; }
 </style>
 </head>
 
 <body>
 <div class="container">
+ <img src="logo.png" class="logo" alt="Logo">
+ <!-- Cabeçalho com o botão da TV -->
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-    <h2>🏥 Triagem Hospitalar</h2>
-    <button class="btn-abrir-tv" onclick="window.open('tv.html', '_blank')">📺 Abrir Tela da TV</button>
+    <h2 style="margin: 0;">🏥 Triagem </h2> <br>
+    <button class="btn-abrir-tv" onclick="window.open('tv.html','_blank')">📺 Abrir Tela da TV</button>
   </div>
-
-  <div class="paciente-fila">
-    <h3>Paciente Cadastrados no Atendimento
-      <span>Clique em "Chamas na TV" para chamar ao guichê</span>
+  <!-- Fila de pacientes de Atendimento criada para mostrar quem pode ser chamado na TV -->
+   <div class="pacientes-fila">
+    <h3> Pacientes Cadastrados no Atendimento
+      <span>Clique em "Chamar na TV" para chamar ao guichê</span>
     </h3>
     <div id="fila-pacientes">
       <p style="color: #888; text-align: center;">Carregando...</p>
     </div>
-    <button onclick="carregandoPacientes()" style="margin-top: 8px; background: #6c757d; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px;">🔄️ Atualizando lista</button>
-  </div>
+    <button onclick="carregarPacientes()"
+    style="margin-top: 8px; background: #6c757d; color: white; border: none; padding: 6px 12px;
+    border-radius: 4px; cursor: pointer; font-size: 13px;">🔄️ Atualizar lista</button>
+   </div>
 
-
-<div class="container">
-
-
-<img src="logo.png" class="logo-img">
-
-
-<h1>Triagem Hospitalar</h1>
-
-
-<p class="subtitulo">
-Avaliação inicial e classificação de risco do paciente.
-</p>
-
-
-
-<h2>Paciente</h2>
-
-<input
-    type="text"
-    id="paciente"
-    name="paciente"
-    placeholder="Digite o nome do paciente"
-    required
->
-
-
-<h2>Sintoma principal</h2>
-
+<input id="nome" placeholder="Nome">
 
 <select id="sintoma">
 
-
-<option value="">
-Selecione o sintoma
-</option>
-
-
-<option value="dor_leve">
-Dor leve
-</option>
-
-
-<option value="resfriado">
-Resfriado
-</option>
-
-
-<option value="coriza">
-Coriza
-</option>
-
-
-<option value="tosse">
-Tosse
-</option>
-
-
-<option value="febre">
-Febre
-</option>
-
-
-<option value="vomito">
-Vômito
-</option>
-
-
-<option value="diarreia">
-Diarreia
-</option>
-
-
-<option value="falta_ar_moderada">
-Falta de ar moderada
-</option>
-
-
-<option value="falta_ar_grave">
-Falta de ar grave
-</option>
-
-
-<option value="infarto">
-Suspeita de infarto
-</option>
-
-
-<option value="avc">
-Suspeita de AVC
-</option>
-
-
-<option value="convulsao">
-Convulsão
-</option>
-
-
-<option value="hemorragia">
-Hemorragia
-</option>
-
+<option value="">Selecione</option>
+<option value="dor_leve">Dor leve</option>
+<option value="resfriado">Resfriado</option>
+<option value="coriza">Coriza</option>
+<option value="tosse">Tosse</option>
+<option value="febre">Febre</option>
+<option value="vomito">Vômito</option>
+<option value="diarreia">Diarreia</option>
+<option value="falta_ar_moderada">Falta de ar moderada</option>
+<option value="falta_ar_grave">Falta de ar grave</option>
+<option value="infarto">Suspeita de infarto</option>
+<option value="avc">Suspeita de AVC</option>
+<option value="convulsao">Convulsão</option>
+<option value="hemorragia">Hemorragia</option>
 
 </select>
 
+<input
+  id="temp"
+  type="number"
+  placeholder="Temperatura"
+/>
 
+<input
+  id="alergia"
+  placeholder="Alergias"
+/>
 
-
-
-<input 
-id="temp"
-type="number"
-placeholder="Temperatura (°C)">
-
-
-
-
-
-<input 
-id="alergia"
-placeholder="Alergias">
-
-
-
-
-
-<textarea 
-id="observacao"
-placeholder="Observações adicionais">
-</textarea>
-
-
-
+<textarea
+  id="observacao"
+  placeholder="Observações"
+></textarea>
 
 <div id="resultado"></div>
 
-
-
 <button onclick="salvar()">
-
 Salvar Triagem
-
 </button>
-
-
 
 </div>
 
-
-
-
-
 <script>
 
+function classificarRisco(sintoma, temperatura){
 
-let pacientes = [];
+  const vermelhos = [
+    "infarto",
+    "avc",
+    "convulsao",
+    "hemorragia",
+    "falta_ar_grave"
+  ];
 
+  const amarelos = [
+    "febre",
+    "vomito",
+    "diarreia",
+    "falta_ar_moderada"
+  ];
 
+  if (temperatura >= 39) {
+    return "vermelho";
+  }
 
-// ==========================
-// CARREGAR PACIENTES
-// ==========================
+  if (vermelhos.includes(sintoma)) {
+    return "vermelho";
+  }
 
+  if (amarelos.includes(sintoma)) {
+    return "amarelo";
+  }
 
-function carregarPacientes() {
-
-    fetch("/pacientes-triagem")
-
-        .then(resposta => resposta.json())
-
-        .then(pacientes => {
-
-            const select =
-                document.getElementById("paciente");
-
-            // Limpa as opções antigas
-            select.innerHTML =
-                '<option value="">Selecione o paciente</option>';
-
-            // Adiciona os pacientes
-            pacientes.forEach(paciente => {
-
-                const option =
-                    document.createElement("option");
-
-                // IMPORTANTE:
-                // o valor será o ID do paciente
-                option.value = paciente.id;
-
-                // O que aparece na tela será o nome
-                option.textContent = paciente.nome;
-
-                select.appendChild(option);
-
-            });
-
-        })
-
-        .catch(erro => {
-
-            console.error(
-                "Erro ao carregar pacientes:",
-                erro
-            );
-
-        });
+  return "verde";
 }
 
+function salvar(){
 
-// ==========================
-// CLASSIFICAR RISCO
-// ==========================
-
-function classificarRisco(sintoma, temperatura) {
-
-    temperatura = Number(temperatura);
-
-    // EMERGÊNCIA
-    if (temperatura >= 40) {
-        return "vermelho";
-    }
-
-    // MUITO URGENTE
-    if (temperatura >= 39) {
-        return "laranja";
-    }
-
-    // URGENTE
-    if (temperatura >= 38) {
-        return "amarelo";
-    }
-
-    // POUCO URGENTE
-    return "verde";
-}
-
-
-// ==========================
-// SALVAR TRIAGEM
-// ==========================
-
-async function salvar() {
-
-    const id = document.getElementById("paciente").value;
+    const nome = document.getElementById("nome").value.trim();
     const sintoma = document.getElementById("sintoma").value;
     const temperatura = document.getElementById("temp").value;
-    const alergia = document.getElementById("alergia").value;
-    const observacao = document.getElementById("observacao").value;
+    const alergia = document.getElementById("alergia").value.trim();
+    const observacao = document.getElementById("observacao").value.trim();
 
-
-    // ==========================
-    // VALIDAÇÕES
-    // ==========================
-
-    if (id === "") {
-        alert("Selecione o paciente.");
+    if (
+        nome === "" ||
+        sintoma === "" ||
+        temperatura === "" ||
+        alergia === "" ||
+        observacao === ""
+    ) {
+        alert("Preencha todos os campos antes de salvar a triagem.");
         return;
     }
 
-    if (sintoma === "") {
-        alert("Selecione o sintoma.");
-        return;
-    }
+    const risco = classificarRisco(sintoma, Number(temperatura));
 
-    if (temperatura === "") {
-        alert("Informe a temperatura.");
-        return;
-    }
+    fetch("http://localhost:3000/triagem", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nome,
+            sintoma,
+            temperatura: Number(temperatura),
+            alergia,
+            observacao,
+            risco
+        })
+    })
+    .then(r => r.json())
+   .then(() => {
+    const resultado = document.getElementById("resultado");
 
+    resultado.className = risco;
+    resultado.innerHTML = "Classificação: " + risco.toUpperCase();
 
-    // ==========================
-    // CONVERTER TEMPERATURA
-    // ==========================
+    alert("Triagem salva com sucesso!");
 
-    const temperaturaNumero = Number(temperatura);
-
-    if (isNaN(temperaturaNumero)) {
-        alert("Informe uma temperatura válida.");
-        return;
-    }
-
-
-    // ==========================
-    // CLASSIFICAR RISCO
-    // ==========================
-
-    const risco = classificarRisco(
-        sintoma,
-        temperaturaNumero
-    );
-
-
-    // ==========================
-    // ENVIAR PARA O SERVIDOR
-    // ==========================
-
-    try {
-
-        const resposta = await fetch("/triagem", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-
-                id: id,
-
-                sintomas: sintoma,
-
-                temperatura: temperaturaNumero,
-
-                alergia: alergia,
-
-                observacao: observacao,
-
-                risco: risco
-
-            })
-
-        });
-
-
-        // ==========================
-        // VERIFICAR RESPOSTA
-        // ==========================
-
-       if (!resposta.ok) {
-
-    const textoErro = await resposta.text();
-
-    console.error(
-        "Resposta do servidor:",
-        textoErro
-    );
-
-    throw new Error(
-        "Servidor respondeu com erro " +
-        resposta.status +
-        ": " +
-        textoErro
-    );
+    // Redireciona para a página do medico
+    window.location.href = "medico.html";
+});
 }
 
-const dados = await resposta.json();
-
-        // ==========================
-        // MOSTRAR RESULTADO
-        // ==========================
-
-        alert(
-            "Triagem salva com sucesso!"
-        );
-
-
-        const resultado =
-            document.getElementById("resultado");
-
-
-        if (resultado) {
-
-            resultado.innerHTML =
-                "Classificação: " +
-                risco.toUpperCase();
-
-        }
-
-
-        // ==========================
-        // IR PARA MÉDICO
-        // ==========================
-
-        setTimeout(() => {
-
-            window.location.href =
-                "medico.html";
-
-        }, 1000);
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro:",
-            erro
-        );
-
-        alert(
-            "Erro ao conectar com o servidor."
-        );
-
-    }
-
-}
-
-
-// ==========================
-// GARANTIR QUE O BOTÃO
-// ENCONTRE A FUNÇÃO
-// ==========================
-
-window.salvar = salvar;
-
-
-
-  
 </script>
 
-
 </body>
-
 </html>
