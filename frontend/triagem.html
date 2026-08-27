@@ -406,22 +406,24 @@ async function salvar() {
         // VERIFICAR RESPOSTA
         // ==========================
 
-        if (!resposta.ok) {
+       if (!resposta.ok) {
 
-            throw new Error(
-                "Erro ao salvar a triagem."
-            );
+    const textoErro = await resposta.text();
 
-        }
+    console.error(
+        "Resposta do servidor:",
+        textoErro
+    );
 
+    throw new Error(
+        "Servidor respondeu com erro " +
+        resposta.status +
+        ": " +
+        textoErro
+    );
+}
 
-        const dados = await resposta.json();
-
-        console.log(
-            "Triagem salva:",
-            dados
-        );
-
+const dados = await resposta.json();
 
         // ==========================
         // MOSTRAR RESULTADO
