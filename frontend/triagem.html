@@ -249,41 +249,49 @@ let pacientes = [];
 // ==========================
 
 
-async function carregarPacientes() {
-    try {
-        const resposta = await fetch("/pacientes-triagem");
+function carregarPacientes() {
 
-        if (!resposta.ok) {
-            throw new Error("Erro ao buscar pacientes");
-        }
+    fetch("/pacientes-triagem")
 
-        const pacientes = await resposta.json();
+        .then(resposta => resposta.json())
 
-        console.log("Pacientes recebidos:", pacientes);
+        .then(pacientes => {
 
-        const select = document.getElementById("paciente");
+            const select =
+                document.getElementById("paciente");
 
-        select.innerHTML = `
-            <option value="">Selecione o paciente</option>
-        `;
+            // Limpa as opções antigas
+            select.innerHTML =
+                '<option value="">Selecione o paciente</option>';
 
-        pacientes.forEach(paciente => {
-            const option = document.createElement("option");
+            // Adiciona os pacientes
+            pacientes.forEach(paciente => {
 
-            option.value = paciente.id;
-            option.textContent = paciente.nome;
+                const option =
+                    document.createElement("option");
 
-            select.appendChild(option);
+                // IMPORTANTE:
+                // o valor será o ID do paciente
+                option.value = paciente.id;
+
+                // O que aparece na tela será o nome
+                option.textContent = paciente.nome;
+
+                select.appendChild(option);
+
+            });
+
+        })
+
+        .catch(erro => {
+
+            console.error(
+                "Erro ao carregar pacientes:",
+                erro
+            );
+
         });
-
-    } catch (erro) {
-        console.error("Erro ao carregar pacientes:", erro);
-    }
 }
-
-carregarPacientes();
-
-
 
 
 // ==========================
@@ -483,11 +491,7 @@ const dados = await resposta.json();
 window.salvar = salvar;
 
 
-// ==========================
-// CARREGAR PACIENTES
-// ==========================
 
-carregarPacientes();
   
 </script>
 
