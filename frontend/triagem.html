@@ -186,7 +186,7 @@ function salvar(){
 
     const risco = classificarRisco(sintoma, Number(temperatura));
 
-    fetch("http://localhost:3000/triagem", {
+    fetch("/triagem", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
