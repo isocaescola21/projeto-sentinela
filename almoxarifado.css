@@ -1,0 +1,599 @@
+
+/* =================================
+   HOSPITAL VIDA PLENA
+   ALMOXARIFADO - ESTILO ERP
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #eef1f5;
+    color: #3d4b5c;
+    min-height: 100vh;
+}
+
+/* =================================
+   CABEÇALHO
+================================= */
+
+.navbar {
+    height: 68px;
+    background: #17256e;
+    color: white;
+    padding: 0 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: #fff;
+    border-radius: 9px;
+    position: relative;
+}
+
+.logo-icon::before {
+    content: "+";
+    color: #17256e;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    left: 10px;
+    top: -1px;
+}
+
+.nav-brand h1 {
+    color: white;
+    font-size: 20px;
+}
+
+.nav-brand span {
+    color: #cbd4f5;
+    font-size: 12px;
+}
+
+.user-pill {
+    background: #263780;
+    color: white;
+    padding: 10px 17px;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+/* =================================
+   CONTEÚDO
+================================= */
+
+.container {
+    width: 96%;
+    max-width: 1500px;
+    margin: 25px auto;
+}
+
+/* =================================
+   INDICADORES
+================================= */
+
+.starts-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #dce2e9;
+    border-radius: 7px;
+    padding: 15px 18px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.03);
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    align-items: center;
+    column-gap: 12px;
+}
+
+.stat-icon {
+    grid-row: span 2;
+    font-size: 23px;
+}
+
+.stat-value {
+    font-size: 23px;
+    font-weight: 700;
+    color: #253b80;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #7c8794;
+}
+
+.purple { color: #526fc0; }
+.green { color: #24ae91; }
+.orange { color: #e9a43c; }
+.red { color: #dc6268; }
+
+/* =================================
+   ALERTA
+================================= */
+
+.alerta-estoque {
+    background: #fff8e9;
+    border: 1px solid #ead8ad;
+    border-left: 4px solid #e9a43c;
+    padding: 14px 18px;
+    border-radius: 5px;
+    margin-bottom: 18px;
+    font-size: 13px;
+}
+
+/* =================================
+   GRID
+================================= */
+
+.mais-grid {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+/* =================================
+   CARDS
+================================= */
+
+.card {
+    background: white;
+    border: 1px solid #cbd2da;
+    border-radius: 7px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,.035);
+}
+
+.card-header {
+    min-height: 48px;
+    padding: 12px 16px;
+    background: #f6f8fa;
+    border-bottom: 1px solid #dce2e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 15px;
+    font-weight: 650;
+    color: #293c65;
+}
+
+.card-body {
+    padding: 17px;
+}
+
+/* =================================
+   FORMULÁRIOS
+================================= */
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 650;
+    color: #566476;
+    margin-bottom: 6px;
+}
+
+input,
+select {
+    width: 100%;
+    height: 37px;
+    padding: 8px 11px;
+    border: 1px solid #cbd3dc;
+    border-radius: 4px;
+    background: white;
+    font-family: inherit;
+    font-size: 13px;
+    color: #435164;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #5276c5;
+    box-shadow: 0 0 0 2px rgba(82,118,197,.12);
+}
+
+/* =================================
+   ABAS
+================================= */
+
+.entrada-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.tab-btn,
+.tab-btnActive {
+    flex: 1;
+    padding: 10px 7px;
+    border: 1px solid #cbd3dc;
+    border-radius: 4px;
+    background: #f5f7f9;
+    color: #53647b;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tab-btn.active,
+.tab-btnActive {
+    background: #24377f;
+    color: white;
+    border-color: #24377f;
+}
+
+/* =================================
+   BOTÕES
+================================= */
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-purple {
+    background: #24377f;
+    color: white;
+}
+
+.btn-purple:hover {
+    background: #344c9c;
+}
+
+.btn-sm {
+    padding: 7px 11px;
+    border: 1px solid #cbd3dc;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.btn-secondary {
+    background: white;
+    color: #40577e;
+}
+
+.btn-sucess {
+    background: #e2f4ed;
+    color: #22865f;
+}
+
+.btn-danger-sm {
+    background: #fff0f0;
+    color: #c64e55;
+}
+
+/* =================================
+   PESQUISA
+================================= */
+
+.search-bar {
+    margin-bottom: 13px;
+}
+
+.search-input {
+    height: 38px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+/* =================================
+   FILTROS
+================================= */
+
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 15px;
+}
+
+.chip {
+    padding: 7px 12px;
+    background: #f1f4f8;
+    color: #53647b;
+    border: 1px solid #d5dce5;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.chip.active {
+    background: #e0effc;
+    color: #244c91;
+    border-color: #a9c9ed;
+}
+
+/* =================================
+   TABELA
+================================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.estoque-table {
+    width: 100%;
+    min-width: 570px;
+    border-collapse: collapse;
+    background: white;
+}
+
+.estoque-table thead {
+    background: #e9edf2;
+}
+
+.estoque-table th {
+    padding: 12px 10px;
+    text-align: left;
+    color: #596879;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 1px solid #d0d7df;
+}
+
+.estoque-table td {
+    padding: 13px 10px;
+    font-size: 12px;
+    color: #586779;
+    border-bottom: 1px solid #e5e9ed;
+    white-space: nowrap;
+}
+
+.estoque-table tbody tr:hover {
+    background: #e5f3fc;
+}
+
+.med-name {
+    font-size: 12px;
+    font-weight: 650;
+    color: #354b6a;
+}
+
+.med-cat {
+    font-size: 11px;
+    color: #8994a2;
+}
+
+.action-row {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
+
+/* =================================
+   SITUAÇÃO DO ESTOQUE
+================================= */
+
+.stock-badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.stock-ok {
+    background: #dff3e9;
+    color: #26845d;
+}
+
+.stock-low {
+    background: #fff0d5;
+    color: #a97920;
+}
+
+.stock-critical {
+    background: #fce4e4;
+    color: #c44c53;
+}
+
+.stock-empty {
+    background: #e9edf1;
+    color: #626e7a;
+}
+
+/* =================================
+   HISTÓRICO
+================================= */
+
+#historicoEntradas {
+    color: #687789;
+    font-size: 12px;
+    padding: 12px;
+}
+
+.empty-icon {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+#historicoEntradas p {
+    text-align: center;
+}
+
+.empty-state {
+    padding: 22px;
+    text-align: center;
+    color: #8793a1;
+}
+
+/* =================================
+   MODAL
+================================= */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(20,30,55,.5);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 430px;
+    background: white;
+    padding: 25px;
+    border-radius: 7px;
+    border: 1px solid #cbd3dc;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.modal-title {
+    font-size: 19px;
+    color: #293c65;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+/* =================================
+   NOTIFICAÇÕES
+================================= */
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 13px 20px;
+    border-radius: 5px;
+    background: #24377f;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s;
+    z-index: 2000;
+    font-size: 13px;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.toast-success { background: #268d67; color: white; }
+.toast-error { background: #c94d55; color: white; }
+.toast-warning { background: #d69b36; color: white; }
+
+/* =================================
+   SCROLL
+================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #aeb9c7;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f2f5;
+}
+
+/* =================================
+   RESPONSIVIDADE
+================================= */
+
+@media(max-width: 950px) {
+    .mais-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 650px) {
+    .navbar {
+        padding: 14px;
+        height: auto;
+        gap: 12px;
+    }
+
+    .nav-brand h1 {
+        font-size: 16px;
+    }
+
+    .container {
+        width: 96%;
+        margin: 18px auto;
+    }
+
+    .starts-bar {
+        grid-template-columns: repeat(2,1fr);
+        gap: 9px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 21px;
+    }
+
+    .card-body {
+        padding: 13px;
+    }
+
+    .entrada-tabs {
+        flex-direction: column;
+    }
+}
